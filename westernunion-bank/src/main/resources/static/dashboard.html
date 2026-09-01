@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard — Western Union Bank</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="page-loader"><div class="loader-mark">WU</div></div>
+<div class="bg-scene"></div>
+
+<div class="dash-shell">
+  <aside class="sidebar glass">
+    <div class="logo-row brand">
+      <span class="mark">WU</span> <strong>Western Union</strong>
+    </div>
+    <div class="side-link active"><span class="ic">🏠</span> Dashboard</div>
+    <div class="side-link" id="link-history"><span class="ic">📜</span> Transactions</div>
+    <div class="side-link" id="link-deposit"><span class="ic">⬇️</span> Deposit</div>
+    <div class="side-link" id="link-withdraw"><span class="ic">⬆️</span> Withdraw</div>
+    <div class="side-link" id="link-transfer"><span class="ic">🔁</span> Transfer</div>
+    <div class="side-link logout" id="logout-btn"><span class="ic">🚪</span> Log Out</div>
+  </aside>
+
+  <main class="dash-main">
+    <div class="dash-topbar">
+      <div>
+        <h1>Good to see you, <span id="user-first-name">—</span> 👋</h1>
+        <div class="welcome-sub">Here's what's happening with your account today.</div>
+      </div>
+      <div class="avatar" id="user-avatar">WU</div>
+    </div>
+
+    <div class="balance-card glass">
+      <div class="bc-label">Total Balance</div>
+      <div class="bc-amount" id="balance-amount">$0.00</div>
+      <div class="bc-meta">
+        <div>
+          <div class="m-label">Account Number</div>
+          <div class="m-value" id="account-number">—
+            <button class="copy-btn" id="copy-acct-btn">Copy</button>
+          </div>
+        </div>
+        <div>
+          <div class="m-label">Account Holder</div>
+          <div class="m-value" id="account-holder">—</div>
+        </div>
+        <div>
+          <div class="m-label">Status</div>
+          <div class="m-value" style="color:#23d18b;">● Active</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-grid">
+      <div class="action-card deposit glass" id="card-deposit">
+        <div class="icon">⬇️</div>
+        <h3>Deposit</h3>
+        <p>Add funds to your Western Union Bank account instantly.</p>
+      </div>
+      <div class="action-card withdraw glass" id="card-withdraw">
+        <div class="icon">⬆️</div>
+        <h3>Withdraw</h3>
+        <p>Take money out of your account securely.</p>
+      </div>
+      <div class="action-card transfer glass" id="card-transfer">
+        <div class="icon">🔁</div>
+        <h3>Transfer</h3>
+        <p>Send money to another Western Union Bank account.</p>
+      </div>
+    </div>
+
+    <div class="panel glass" id="history-panel">
+      <div class="panel-head">
+        <h2>Recent Transactions</h2>
+        <button class="btn btn-ghost" id="refresh-btn">↻ Refresh</button>
+      </div>
+      <div id="txn-list">
+        <div class="empty-state">Loading transactions…</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Deposit Modal -->
+<div class="modal-overlay" id="deposit-modal">
+  <div class="modal-box glass">
+    <div class="modal-close" data-close>✕</div>
+    <h2>Deposit Funds</h2>
+    <p class="sub">Add money to your account.</p>
+    <form id="deposit-form">
+      <div class="field">
+        <label>Amount (USD)</label>
+        <input type="number" id="deposit-amount" step="0.01" min="0.01" placeholder="0.00" required />
+      </div>
+      <div class="field">
+        <label>Note (optional)</label>
+        <input type="text" id="deposit-note" placeholder="e.g. Paycheck deposit" />
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">
+        <span class="spinner"></span>
+        <span class="btn-label">Confirm Deposit</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Withdraw Modal -->
+<div class="modal-overlay" id="withdraw-modal">
+  <div class="modal-box glass">
+    <div class="modal-close" data-close>✕</div>
+    <h2>Withdraw Funds</h2>
+    <p class="sub">Take money out of your account.</p>
+    <form id="withdraw-form">
+      <div class="field">
+        <label>Amount (USD)</label>
+        <input type="number" id="withdraw-amount" step="0.01" min="0.01" placeholder="0.00" required />
+      </div>
+      <div class="field">
+        <label>Note (optional)</label>
+        <input type="text" id="withdraw-note" placeholder="e.g. ATM withdrawal" />
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">
+        <span class="spinner"></span>
+        <span class="btn-label">Confirm Withdrawal</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Transfer Modal -->
+<div class="modal-overlay" id="transfer-modal">
+  <div class="modal-box glass">
+    <div class="modal-close" data-close>✕</div>
+    <h2>Transfer Money</h2>
+    <p class="sub">Send funds to another Western Union Bank account.</p>
+    <form id="transfer-form">
+      <div class="field">
+        <label>Recipient Account Number</label>
+        <input type="text" id="transfer-to" placeholder="WU384920175610" required />
+        <div class="hint" id="recipient-hint"></div>
+      </div>
+      <div class="field">
+        <label>Amount (USD)</label>
+        <input type="number" id="transfer-amount" step="0.01" min="0.01" placeholder="0.00" required />
+      </div>
+      <div class="field">
+        <label>Note (optional)</label>
+        <input type="text" id="transfer-note" placeholder="e.g. Rent split" />
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">
+        <span class="spinner"></span>
+        <span class="btn-label">Send Money</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal-overlay" id="success-modal">
+  <div class="modal-box glass" style="text-align:center;">
+    <div class="modal-close" data-close>✕</div>
+    <div class="success-check">✓</div>
+    <h2 id="success-title">Success!</h2>
+    <p class="sub" id="success-message">Your transaction was completed.</p>
+    <button class="btn btn-primary btn-block" data-close>Done</button>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/animate-number.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

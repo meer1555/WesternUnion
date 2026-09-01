@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Western Union Bank — Banking, Reimagined</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="page-loader"><div class="loader-mark">WU</div></div>
+<div class="bg-scene"></div>
+<canvas id="particle-canvas"></canvas>
+
+<nav class="navbar">
+  <div class="brand"><span class="mark">WU</span> Western Union Bank</div>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#security">Security</a>
+    <a href="login.html" class="btn btn-ghost">Log In</a>
+    <a href="signup.html" class="btn btn-primary">Open Account</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">✦ Trusted digital banking</span>
+    <h1>Move your money with <span class="accent">confidence &amp; speed</span></h1>
+    <p>Open an account in minutes, get an instant account number, and deposit, withdraw or transfer funds anytime — all wrapped in a beautifully premium banking experience.</p>
+    <div class="hero-actions">
+      <a href="signup.html" class="btn btn-primary">Open a Free Account →</a>
+      <a href="login.html" class="btn btn-ghost">I already bank here</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num" id="stat-users">120K+</div>
+        <div class="stat-label">Accounts opened</div>
+      </div>
+      <div>
+        <div class="stat-num">$2.4B</div>
+        <div class="stat-label">Transferred securely</div>
+      </div>
+      <div>
+        <div class="stat-num">99.98%</div>
+        <div class="stat-label">Uptime</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="media-frame">
+      <video autoplay muted loop playsinline
+             poster="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1600&auto=format&fit=crop">
+        <source src="videos/hero-banking.mp4" type="video/mp4" />
+      </video>
+      <div class="frame-overlay"></div>
+    </div>
+    <div class="floating-card glass">
+      <div class="fc-label">Available Balance</div>
+      <div class="fc-value" id="floating-balance">$0.00</div>
+      <div class="fc-badge"><span class="pulse-dot"></span> Live &amp; Secured</div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="feature-card glass reveal">
+    <div class="icon">⚡</div>
+    <h3>Instant Account Number</h3>
+    <p>Sign up and get a unique Western Union Bank account number generated for you instantly — no waiting, no paperwork.</p>
+  </div>
+  <div class="feature-card glass reveal">
+    <div class="icon">💳</div>
+    <h3>Deposit &amp; Withdraw</h3>
+    <p>Move money in and out of your account in real time, with every transaction logged to your personal history.</p>
+  </div>
+  <div class="feature-card glass reveal" id="security">
+    <div class="icon">🔒</div>
+    <h3>Secure Transfers</h3>
+    <p>Send funds to any Western Union Bank account number with bank-grade JWT authentication and encrypted passwords.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  © 2026 Western Union Bank — Demo educational banking application. Not a real financial institution.
+</footer>
+
+<script src="js/particles.js"></script>
+<script src="js/animate-number.js"></script>
+<script src="js/api.js"></script>
+<script>
+  Auth.redirectIfLoggedIn();
+  const floatingBalanceEl = document.getElementById('floating-balance');
+  if (floatingBalanceEl) animateNumber(floatingBalanceEl, 48210.55, { prefix: '$' });
+</script>
+</body>
+</html>
